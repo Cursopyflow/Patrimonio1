@@ -116,10 +116,7 @@ public class Patrimonio implements BuscarConservacao {
 
         @Override
         public String validarEstadoConservacao() {
-            if (estadoConservacao != null && !estadoConservacao.isBlank()) {
-                return estadoConservacao;
-            }
-            return "SEM ESTADO DE CONSERVAÇÃO";
+            return estado != null ? estado.toString() :"SEM ESTADO DE CONSERVAÇÃO";
         }
     }
 
