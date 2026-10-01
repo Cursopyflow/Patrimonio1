@@ -5,6 +5,7 @@ import br.com.senai.patrimonio.avaliacao.enums.Nivel;
 import br.com.senai.patrimonio.model.*;
 import br.com.senai.patrimonio.model.enums.Cargo;
 import br.com.senai.patrimonio.model.enums.EstadoConservacao;
+import org.apache.tomcat.util.net.jsse.JSSEUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -60,6 +61,29 @@ public class PatrimonioApplication {
 
 		patrimonio.setEstado(EstadoConservacao.INSERVIVEL);
 		System.out.println(patrimonio.validarEstadoConservacao());
+
+		System.out.println("TESTE DE BEM");
+		Bem bem = new Bem();
+		System.out.println(bem.getEmpresaVinculada());
+
+
+		Empresa empresa1 = new Empresa();
+		bem.setEmpresa(empresa1);
+		System.out.println(bem.getEmpresaVinculada());
+
+		System.out.println("TESTE DE BLOCO");
+		Bloco bloco = new Bloco();
+		System.out.println(bloco.getEmpresaVinculada());
+
+		System.out.println("TESTE DE FUNCIONÁRIO");
+		Funcionario funcionario1 = new Funcionario();
+		System.out.println(funcionario1.getEmpresaVinculada());
+
+
+		System.out.println("TESTE SE SALA");
+		Sala sala1 = new Sala();
+		System.out.println(sala1.getEmpresaVinculada());
+
 
 	}
 }
