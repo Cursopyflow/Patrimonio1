@@ -79,6 +79,15 @@ public class PatrimonioApplication {
 		Funcionario funcionario1 = new Funcionario();
 		System.out.println(funcionario1.getEmpresaVinculada());
 
+		Pessoa pessoa = new Pessoa();
+		pessoa.setNome("Joãozinho");
+		pessoa.setCpf("123456789");
+		System.out.println(pessoa.getIdentificacao());
+
+		funcionario1.setNome("Mariazinha");
+		funcionario1.setCpf("123456789");
+		funcionario1.setCargo(Cargo.DIRETOR);
+		System.out.println(funcionario1.getIdentificacao());
 
 		System.out.println("TESTE SE SALA");
 		Sala sala1 = new Sala();

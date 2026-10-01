@@ -53,7 +53,12 @@ public class Funcionario extends Pessoa implements Localizavel, BuscarEmpresaVin
 
     @Override
     public String getEmpresaVinculada() {
-        return empresa != null ? "Empresa: " + empresa.getNome():
+        return empresa != null ? "Empresa: " + empresa.getNome() :
                 "Empresa não informada";
+    }
+
+    @Override
+    public String getIdentificacao(){
+            return super.getIdentificacao() + " - " + cargo;
     }
 }
