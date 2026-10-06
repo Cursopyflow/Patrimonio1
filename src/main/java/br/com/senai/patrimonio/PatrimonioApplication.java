@@ -1,17 +1,16 @@
 package br.com.senai.patrimonio;
 
 
-import br.com.senai.patrimonio.atividades.Computador;
-import br.com.senai.patrimonio.atividades.Equipamento;
-import br.com.senai.patrimonio.atividades.Gerente;
-import br.com.senai.patrimonio.atividades.Veiculo;
+import br.com.senai.patrimonio.atividades.*;
 import br.com.senai.patrimonio.avaliacao.Participante;
 import br.com.senai.patrimonio.avaliacao.enums.Nivel;
 import br.com.senai.patrimonio.model.*;
+import br.com.senai.patrimonio.model.Funcionario;
 import br.com.senai.patrimonio.model.enums.Cargo;
 import br.com.senai.patrimonio.model.enums.EstadoConservacao;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.converter.json.GsonBuilderUtils;
 
 @SpringBootApplication
 public class PatrimonioApplication {
@@ -120,6 +119,19 @@ public class PatrimonioApplication {
 		exibirRelatorio(equipamento);
 		exibirRelatorio(computador);
 		exibirRelatorio(veiculo);
+
+		System.out.println("-------ATIVIDADE POLIMORFISMO 2------------");
+
+		br.com.senai.patrimonio.atividades.Funcionario comum =
+				new br.com.senai.patrimonio.atividades.Funcionario("João", 500);
+		br.com.senai.patrimonio.atividades.Funcionario gerente =
+				new Gerente("Cleber", 8000);
+		br.com.senai.patrimonio.atividades.Funcionario desenvolvedor =
+				new Desenvolvedor("Marildo", 3000);
+
+		imprimirContraCheque(comum);
+		imprimirContraCheque(gerente);
+		imprimirContraCheque(desenvolvedor);
 	}
 
 	private static void exibirRelatorio(Equipamento item) {
@@ -127,15 +139,11 @@ public class PatrimonioApplication {
 		System.out.println("Valor Inicial: R$ " + item.getValorInicial());
 		System.out.println("Depreciação: R$ " + item.calcularDepreciacao());
 		System.out.println("-------------------------------------------");
-
-
-
-		System.out.println("ATIVIDADE POLIMORFISMO 2 -------------------------");
-
-		br.com.senai.patrimonio.atividades.Funcionario  comum =
-				new br.com.senai.patrimonio.atividades.Funcionario("João",514.12);
-
-		br.com.senai.patrimonio.atividades.Funcionario gerente = new Gerente("Cleber",3500);
-
+	}
+	private static void imprimirContraCheque (br.com.senai.patrimonio.atividades.Funcionario f){
+		System.out.println("Funcionário: " + f.getNome());
+		System.out.println("Salário base: R$ " + f.getSalarioBase());
+		System.out.println("Bonificação: R$ " + f.calcularBonificacao());
+		System.out.println("-------------------------------------------");
 	}
 }
