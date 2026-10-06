@@ -1,11 +1,15 @@
 package br.com.senai.patrimonio;
 
+
+import br.com.senai.patrimonio.atividades.Computador;
+import br.com.senai.patrimonio.atividades.Equipamento;
+import br.com.senai.patrimonio.atividades.Gerente;
+import br.com.senai.patrimonio.atividades.Veiculo;
 import br.com.senai.patrimonio.avaliacao.Participante;
 import br.com.senai.patrimonio.avaliacao.enums.Nivel;
 import br.com.senai.patrimonio.model.*;
 import br.com.senai.patrimonio.model.enums.Cargo;
 import br.com.senai.patrimonio.model.enums.EstadoConservacao;
-import org.apache.tomcat.util.net.jsse.JSSEUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -56,43 +60,82 @@ public class PatrimonioApplication {
 
 		System.out.println(salaInterface.getDescricaoLocalizavel());
 
+
 		Patrimonio patrimonio = new Patrimonio();
 		System.out.println(patrimonio.validarEstadoConservacao());
 
 		patrimonio.setEstado(EstadoConservacao.INSERVIVEL);
 		System.out.println(patrimonio.validarEstadoConservacao());
 
-		System.out.println("TESTE DE BEM");
 		Bem bem = new Bem();
 		System.out.println(bem.getEmpresaVinculada());
-
 
 		Empresa empresa1 = new Empresa();
 		bem.setEmpresa(empresa1);
 		System.out.println(bem.getEmpresaVinculada());
 
-		System.out.println("TESTE DE BLOCO");
+		empresa1.setNome("Senai");
+		System.out.println(bem.getEmpresaVinculada());
+
+		System.out.println("Teste do Bloco:");
 		Bloco bloco = new Bloco();
 		System.out.println(bloco.getEmpresaVinculada());
 
-		System.out.println("TESTE DE FUNCIONÁRIO");
+		bloco.setEmpresa(empresa1);
+		System.out.println(bloco.getEmpresaVinculada());
+
+		System.out.println("Teste de funcionário");
 		Funcionario funcionario1 = new Funcionario();
 		System.out.println(funcionario1.getEmpresaVinculada());
 
-		Pessoa pessoa = new Pessoa();
-		pessoa.setNome("Joãozinho");
-		pessoa.setCpf("123456789");
-		System.out.println(pessoa.getIdentificacao());
+		funcionario1.setEmpresa(empresa1);
+		System.out.println(funcionario1.getEmpresaVinculada());
 
-		funcionario1.setNome("Mariazinha");
-		funcionario1.setCpf("123456789");
-		funcionario1.setCargo(Cargo.DIRETOR);
-		System.out.println(funcionario1.getIdentificacao());
-
-		System.out.println("TESTE SE SALA");
+		System.out.println("Teste de Sala");
 		Sala sala1 = new Sala();
 		System.out.println(sala1.getEmpresaVinculada());
 
+		sala1.setEmpresa(empresa1);
+		System.out.println(sala1.getEmpresaVinculada());
+
+		Pessoa pessoa = new Pessoa();
+
+		pessoa.setNome("Joãozinho");
+		pessoa.setCpf("45787878");
+		System.out.println(pessoa.getIdentificacao());
+
+		funcionario1.setNome("Mariazinha");
+		funcionario1.setCpf("12345678");
+		funcionario1.setCargo(Cargo.DIRETOR);
+		System.out.println(funcionario1.getIdentificacao());
+
+
+		System.out.println("ATIVIDADE POLIMORFISMO 1 -------------------------");
+
+		Equipamento equipamento = new Equipamento("Impressora", 2000.00);
+		Equipamento computador = new Computador("Notebook Dell", 5000.00);
+		Equipamento veiculo = new Veiculo("Fiat Strada", 80000.00);
+
+
+		exibirRelatorio(equipamento);
+		exibirRelatorio(computador);
+		exibirRelatorio(veiculo);
+	}
+
+	private static void exibirRelatorio(Equipamento item) {
+		System.out.println("Item: " + item.getNome());
+		System.out.println("Valor Inicial: R$ " + item.getValorInicial());
+		System.out.println("Depreciação: R$ " + item.calcularDepreciacao());
+		System.out.println("-------------------------------------------");
+
+
+
+		System.out.println("ATIVIDADE POLIMORFISMO 2 -------------------------");
+
+		br.com.senai.patrimonio.atividades.Funcionario  comum =
+				new br.com.senai.patrimonio.atividades.Funcionario("João",514.12);
+
+		br.com.senai.patrimonio.atividades.Funcionario gerente = new Gerente("Cleber",3500);
 
 	}
 }
